@@ -1,15 +1,18 @@
 #----------------------------------------Imports----------------------------------------#
+# pip install gTTS
+# pip install pypdf2
+# pip install mutagen
+# pip install python-time
 from gtts import *
 import os
 import PyPDF2
-# pip install gTTS
-# pip install pypdf2
 import time
 from mutagen.mp3 import MP3
 
 
 #--------------------------------------Open The PDF-------------------------------------#
-pdf = open("pdf_file.pdf", 'rb')
+filename = "pdf_file.pdf"
+pdf = open(filename, 'rb')
 pdf_reader = PyPDF2.PdfFileReader(pdf)
 
 #-----------------------------Get The Total Number of Pages-----------------------------#
