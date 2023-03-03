@@ -4,8 +4,11 @@ This python script converts PDF files to MP3 files and immediately opens the new
 
 Installations:
 $ pip install gTTS
+#
 $ pip install PyPDF2
+#
 $ pip install mutagen
+#
 $ pip install python-time
 
 To convert a PDF to an audio file, put the PDF in the same folder as main.py and store the file path in the variable "filename" in main.py
