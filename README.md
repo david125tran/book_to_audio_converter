@@ -2,7 +2,7 @@
 
 This python script converts PDF files to MP3 files and immediately opens the new audio file for the user.  Run this in a python IDE such as PyCharm.  
 
-Installations:
+Installations:  
 $ pip install gTTS  
 $ pip install PyPDF2  
 $ pip install mutagen  
