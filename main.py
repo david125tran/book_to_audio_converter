@@ -1,14 +1,13 @@
-#----------------------------------------Imports----------------------------------------#
+#----------------------------------------Terminal Installations----------------------------------------#
 # pip install gTTS
 # pip install pypdf2
 # pip install mutagen
-# pip install python-time
+
+#----------------------------------------Imports----------------------------------------#
 from gtts import *
 import os
 import PyPDF2
-import time
 from mutagen.mp3 import MP3
-
 
 #--------------------------------------Open The PDF-------------------------------------#
 filename = "pdf_file.pdf"
@@ -19,27 +18,23 @@ pdf_reader = PyPDF2.PdfFileReader(pdf)
 total_pages = pdf_reader.numPages
 
 #-----------------------------------Extract The Text------------------------------------#
-print("\npdf being extracted to audio, hang tight...")
-
-for page_number in range (0, total_pages):
+text = ""
+for page_number in range(0, total_pages):
     # Extract the text from each page
     new_page = pdf_reader.getPage(page_number)
     new_page_text = new_page.extractText()
-    # Convert the text to speech (.mp3 file)
-    new_page_speech = gTTS(text=new_page_text, lang='en', slow=False)
-    # Each page becomes a new file
-    new_page_speech.save(f"new_page_speech_{page_number}.mp3")
+    text = text + "\n\n" + new_page_text  # Add the text to the previous pages if there are any
 
-print("\nText extraction complete.  Audio opening...")
+print("\npdf being extracted to audio, hang tight...")
 
-#-----------------------------------Play the Speech------------------------------------#
-for page_number in range (0, total_pages):
-    os.system(f"new_page_speech_{page_number}.mp3")
-    audio = MP3(f"new_page_speech_{page_number}.mp3") # Extract the length of the mp3 of the page
-    time.sleep(int(audio.info.length) + 2) # Wait for the mp3 of the page to finish playing before looping to
-    # the next page
+# -----------------------------------Convert the text to mp3 audio------------------------------------#
+audio = gTTS(text=text, lang='en', slow=False)
+# Each page becomes a new file
+audio.save("audio.mp3")
 
-
+# -----------------------------------Play the Speech------------------------------------#
+os.system("audio.mp3")
+print(text)
 
 
 
